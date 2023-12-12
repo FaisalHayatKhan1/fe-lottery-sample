@@ -1,4 +1,5 @@
 import { AvatarComponent } from "@root/components/Avatar";
+import { Link } from "lucide-react";
 import React from "react";
 import { AiFillMessage } from "react-icons/ai";
 const Topnavbar = (props: any) => {
@@ -31,7 +32,10 @@ const Topnavbar = (props: any) => {
             />
           </svg>
         </button>
-        <div className="hidden w-full md:block md:w-auto m-auto" id="navbar-default">
+        <div
+          className="hidden w-full md:block md:w-auto m-auto"
+          id="navbar-default"
+        >
           <h1 className=" text-f48 text-center">Lottery</h1>
         </div>
       </div>

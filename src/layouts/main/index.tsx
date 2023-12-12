@@ -1,5 +1,6 @@
 
 
 export default function MainLayout({ children }: any) {
-  return <div>{children}</div>;
+  return <div>
+    {children}</div>;
 }
