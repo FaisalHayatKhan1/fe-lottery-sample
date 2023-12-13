@@ -4,10 +4,8 @@ import { useEffect, useState } from "react";
 import { enqueueSnackbar } from "notistack";
 import FormProvider from "@root/components/hook-form/FormProvider";
 import { EyeOff, Eye } from "lucide-react";
-import LoadingComponent from "@root/components/Loading";
 // form
 import { LoginFormSchema, defaultValues } from ".";
-import { useLoginMutation } from "@root/services/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { RHFTextField } from "@root/components/hook-form";
@@ -16,7 +14,6 @@ import useAuth from "@root/hooks/useAuth";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [loginTrigger, { isLoading }] = useLoginMutation();
   const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
   const { login } = useAuth();
 
@@ -25,15 +22,9 @@ const Login = () => {
     defaultValues,
   });
 
-  const {
-    handleSubmit,
-    formState: { isSubmitting, isValid },
-    reset,
-  } = methods;
+  const { handleSubmit, reset } = methods;
 
   const onSubmit = async (credentials: any) => {
-    // const res: any = await loginTrigger(credentials);
-    // const { data, error } = res;
     if (
       credentials.email === "tempmail@dev.com" &&
       credentials.password === "TEMP_pw1234"
@@ -45,20 +36,18 @@ const Login = () => {
           user: { email: credentials?.email, password: credentials?.password },
         },
       });
+      enqueueSnackbar("Log in Successfully", {
+        variant: "success",
+      });
     } else {
       setErrorMessage("Email or Password is Incorrect");
       return;
     }
-    // if (error) {
-    //   setErrorMessage("Email or Password is Incorrect");
-    // } else {
-    //   reset();
-    // }
   };
   return (
     <div className="h-screen overflow-hidden flex items-center justify-center">
       <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-        {isLoading && <LoadingComponent primaryLoading />}
+        {/* {isLoading && <LoadingComponent primaryLoading />} */}
         <h2 className="text-f37 font-medium text-center">Lottery</h2>
         <div className="rounded-[18px] min-w-[450px] p-8 mt-5 space-y-3 ">
           <RHFTextField

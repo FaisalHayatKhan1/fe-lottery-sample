@@ -1,5 +1,8 @@
 import { baseAPI } from "./baseApi";
 
+
+//----------- currently this is the dummay rtk query auth api--------
+
 export const authAPI = baseAPI.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.mutation({
@@ -16,28 +19,7 @@ export const authAPI = baseAPI.injectEndpoints({
         body: user,
       }),
     }),
-    resetPassword: builder.mutation({
-      query: (user: any) => ({
-        url: "register",
-        method: "POST",
-        body: user,
-      }),
-    }),
-    passCode: builder.mutation({
-      query: (user: any) => ({
-        url: "register",
-        method: "POST",
-        body: user,
-      }),
-    }),
-    resendCode: builder.mutation({
-      query: (user: any) => ({
-        url: "register",
-        method: "POST",
-        body: user,
-      }),
-    }),
   }),
 });
 
-export const { useLoginMutation, useRegisterMutation,useResetPasswordMutation ,usePassCodeMutation,useResendCodeMutation} = authAPI;
+export const { useLoginMutation, useRegisterMutation } = authAPI;

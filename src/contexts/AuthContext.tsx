@@ -74,8 +74,8 @@ function AuthProvider({ children }: { children: ReactNode }) {
           user,
         }: { authToken: string; refreshToken: string; user: any } =
           getSession();
-
-        if (authToken && isValidToken(authToken)) {
+        // need to add token if api is missing isValidToken(authToken)
+        if (authToken) {
           dispatch({
             type: "INITIALIZE",
             payload: {
@@ -114,9 +114,9 @@ function AuthProvider({ children }: { children: ReactNode }) {
     const { authToken, refreshToken, user } = response.data;
 
     setSession({
-      authToken: "asdasdasdadsasdasd",
-      refreshToken: "adadadsasd",
-      user: { email: "tempmail@dev.com", password: "TEMP_pw1234" },
+      authToken: authToken,
+      refreshToken: refreshToken,
+      user: { email: user?.email, password: "TEMP_pw1234" },
     });
 
     dispatch({
